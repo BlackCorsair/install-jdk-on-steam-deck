@@ -77,7 +77,7 @@ set_variables_for_the_installation() {
 #### MAIN ####
 
 log_info "Checking if you already have java installed"
-#exit_if_jdk_is_installed
+exit_if_jdk_is_installed
 log_info "Installing jdk17 on your local folder '.local/'..."
 
 log_info "Downloading and decompressing jdk17 from oracle page..."
