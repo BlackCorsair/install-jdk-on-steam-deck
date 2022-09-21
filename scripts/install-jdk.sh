@@ -90,7 +90,7 @@ set_variables_for_the_installation
 log_info "Checking that java is properly installed..."
 # shellcheck disable=SC1090
 source ~/.bashrc
-if type java
+if "${INSTALLATION_DIR}/${JDK_17_EXTRACTED_DIR}/bin/java" -version
 then
     log_info "Java is succesfully installed!"
     log_warning "To activate your java installation execute the following:\n\n\tsource ~/.bashrc\n\n"
