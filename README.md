@@ -23,8 +23,8 @@ Taking this into account, the script located in the `scripts` directory of this 
 * Extract the file into `~/.local/jdk/jdk-17.0.4.1`
 * Add some environment variables to your `~/.bashrc`, so your programs / scripts know where `java` is installed.
     The variables are:
-    q* JAVA_HOME: which points to the `~/.local/jdk/jdk-17.0.4.1`
-    * PATH: which adds the `bin`directory located in the JAVA_HOME, so every executable is available for you to run
+    * JAVA_HOME: which points to the `~/.local/jdk/jdk-17.0.4.1`
+    * PATH: which adds the `bin` directory located in the JAVA_HOME, so every executable is available for you to run
 
 With this, you will have a *local* installation of java and even better, you can install multiple versions and then point
 to the one you need.
