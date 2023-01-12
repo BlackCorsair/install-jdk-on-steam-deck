@@ -41,8 +41,8 @@ git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git
 TO-DO
 =====
 
-* In the `install_jdk` function, replace all the `exit` commands for a cleanup function so the user
-    can't have half-assed failed installation assets
+* If you want anything added, just let me know by opening an [issue][3]
 
 [1]: https://partner.steamgames.com/doc/steamdeck/faq
 [2]: https://www.flatpak.org/
+[3]: https://github.com/BlackCorsair/install-jdk-on-steam-deck/issues/new

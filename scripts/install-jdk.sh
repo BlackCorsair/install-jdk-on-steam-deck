@@ -29,10 +29,16 @@ log_error() {
     echo -e "${RED}${1}${NC}"
 }
 
+cleanup() {
+    cleanup_command="rm -rf ${INSTALLATION_DIR}"
+    log_info "Cleaning unsuccesful installation: ${cleanup_command}"
+    $cleanup_command
+}
+
 # if java can't be found (! type java), it won't print anything
 # if java can be found (type java), then will print the message and exit
 exit_if_jdk_is_installed() {
-    ! type java || { log_warning "jdk is already installed, the installed will skip the installation"; exit 0; }
+    ! type java || { log_warning "JDK is already installed, the installed will skip the installation"; exit 0; }
 }
 
 # TO-DO: instead of 'exit 1', call a cleanup function
@@ -41,24 +47,24 @@ exit_if_jdk_is_installed() {
 # uncompress and check
 # clean uneeded files
 install_jdk() {
-    mkdir -p "${INSTALLATION_DIR}" || { log_error "Couldn't create the installation directory, exiting..."; exit 1; }
-    cd "${INSTALLATION_DIR}" || { log_error "Couldn't 'cd' into the installation directory, exiting..."; exit 1; }
+    mkdir -p "${INSTALLATION_DIR}" || { log_error "Couldn't create the installation directory, exiting..."; cleanup; exit 1; }
+    cd "${INSTALLATION_DIR}" || { log_error "Couldn't 'cd' into the installation directory, exiting..."; cleanup; exit 1; }
 
     # this repeated trick works as: if the command returns anything other than 0, it will exec what's on the right side
     # of the || (or) operator
     wget -O "${JDK_17_FILE_NAME}" "${JDK_17_URL}" --show-progress || \
-        { log_error "Couldn't download the jdk release, exiting..."; exit 1; }
-    
+        { log_error "Couldn't download the jdk release, exiting..."; cleanup; exit 1; }
+
     wget -O "${JDK_17_CHECKSUM_FILE_NAME}" "${JDK_17_CHECKSUM_URL}" --show-progress || \
-        { log_error "Couldn't download the jdk checksum release, exiting..."; exit 1; }
-    
+        { log_error "Couldn't download the jdk checksum release, exiting..."; cleanup; exit 1; }
+
     # append the file so the checksum file points to the file we want to check
     echo "  ${JDK_17_FILE_NAME}" >> "${JDK_17_CHECKSUM_FILE_NAME}"
 
     sha256sum -c "${JDK_17_CHECKSUM_FILE_NAME}" || \
-        { log_error "Downloaded jdk doesn't match the checksum, don't trust this url!!!\n${JDK_17_URL}"; exit 1; }
+        { log_error "Downloaded jdk doesn't match the checksum, don't trust this url!!!\n${JDK_17_URL}"; cleanup; exit 1; }
 
-    tar xvf "${JDK_17_FILE_NAME}" || { log_error "Couldn't decompress the jdk file, exiting..."; exit 1; }
+    tar xvf "${JDK_17_FILE_NAME}" || { log_error "Couldn't decompress the jdk file, exiting..."; cleanup; exit 1; }
 
     rm -f "${JDK_17_FILE_NAME}" "${JDK_17_CHECKSUM_FILE_NAME}"
 
@@ -97,3 +103,5 @@ then
 else
     log_error "Java wasn't installed properly, please check the script :("
 fi
+
+log_info "Done"
