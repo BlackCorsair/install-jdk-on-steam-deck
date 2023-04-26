@@ -1,10 +1,10 @@
 #!/bin/bash
 
-JDK_17_URL=https://download.oracle.com/java/17/archive/jdk-17.0.4.1_linux-x64_bin.tar.gz
-JDK_17_CHECKSUM_URL=https://download.oracle.com/java/17/archive/jdk-17.0.4.1_linux-x64_bin.tar.gz.sha256
-JDK_17_EXTRACTED_DIR=jdk-17.0.4.1
-JDK_17_FILE_NAME=jdk-17.0.4.1_linux-x64_bin.tar.gz
-JDK_17_CHECKSUM_FILE_NAME=jdk-17.0.4.1_linux-x64_bin.tar.gz.sha256
+JDK_17_URL=https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+JDK_17_CHECKSUM_URL=https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz.sha256
+JDK_17_EXTRACTED_DIR=to-be-known-later
+JDK_17_FILE_NAME=jdk-17_linux-x64_bin.tar.gz
+JDK_17_CHECKSUM_FILE_NAME=jdk-17_linux-x64_bin.tar.gz.sha256
 
 INSTALLATION_DIR="${HOME}/.local/jdk"
 
@@ -41,8 +41,6 @@ exit_if_jdk_is_installed() {
     ! type java || { log_warning "JDK is already installed, the installed will skip the installation"; exit 0; }
 }
 
-# TO-DO: instead of 'exit 1', call a cleanup function
-
 # download the jdk tar release from oracle and it's checksum
 # uncompress and check
 # clean uneeded files
@@ -65,6 +63,8 @@ install_jdk() {
         { log_error "Downloaded jdk doesn't match the checksum, don't trust this url!!!\n${JDK_17_URL}"; cleanup; exit 1; }
 
     tar xvf "${JDK_17_FILE_NAME}" || { log_error "Couldn't decompress the jdk file, exiting..."; cleanup; exit 1; }
+
+    JDK_17_EXTRACTED_DIR=$(tar tf jdk-17_linux-x64_bin.tar.gz | head -1 | cut -f1 -d"/")
 
     rm -f "${JDK_17_FILE_NAME}" "${JDK_17_CHECKSUM_FILE_NAME}"
 
