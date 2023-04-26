@@ -21,10 +21,19 @@ Taking this into account, the script located in the `scripts` directory of this 
 * Download the official oracle JDK 17 compressed file into your **home** directory, more specifically into `~/.local/jdk`
 * Exec a checksum of the file using the official sha256 checksum
 * Extract the file into `~/.local/jdk/jdk-17.0.4.1`
-* Add some environment variables to your `~/.bashrc`, so your programs / scripts know where `java` is installed.
+* Add some environment variables to your `~/.profile` and then source it, if it wasn't already sourced, in your bashrc,
+  so your programs / scripts know where `java` is installed.
     The variables are:
     * JAVA_HOME: which points to the `~/.local/jdk/jdk-17.0.4.1`
     * PATH: which adds the `bin` directory located in the JAVA_HOME, so every executable is available for you to run
+
+By adding the variables to `.profile` instead of `.bashrc` we ensure to be more "shell agnostic", so if you run
+a script in another shell like `sh` or launch a graphical program, it should read the environment variables defined there.
+
+`.profile` is "manually" sourced in `.bashrc` since `bash` will try to source first `.bash_profile` and `.bash_login` if they exist.
+To learn about this:
+* [man sh: Invocation][4]
+* [bash manual: Invoked with name sh][5].
 
 With this, you will have a *local* installation of java and even better, you can install multiple versions and then point
 to the one you need.
@@ -46,3 +55,5 @@ TO-DO
 [1]: https://partner.steamgames.com/doc/steamdeck/faq
 [2]: https://www.flatpak.org/
 [3]: https://github.com/BlackCorsair/install-jdk-on-steam-deck/issues/new
+[4]: https://man.freebsd.org/cgi/man.cgi?query=sh&manpath=Unix+Seventh+Edition
+[5]: https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Bash-Startup-Files
