@@ -50,6 +50,8 @@ git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git
 TO-DO
 =====
 
+* Add an uninstall script or guide
+* Add support for java 8 (see [issue](https://github.com/BlackCorsair/install-jdk-on-steam-deck/issues/3))
 * If you want anything added, just let me know by opening an [issue][3]
 
 [1]: https://partner.steamgames.com/doc/steamdeck/faq
