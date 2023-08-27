@@ -47,10 +47,29 @@ git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git
 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
 ```
 
+How to uninstall it
+===================
+
+```bash
+# remove the installation directory this script creates
+rm -rf /home/deck/.local/jdk
+
+# remove the ~/.profile file this script creates OR remove the lines using an editor:
+# export JAVA_HOME=/home/deck/.local/jdk
+# export PATH=$PATH:/home/deck/.local/jdk/jdk-17.0.8/bin
+rm -f ~/.profile
+
+# Optionally, you can remove the line added to your bashrc
+#
+# [[ -f ~/.profile ]] && source ~/.profile
+#
+# This line shouldn't interfere with anything since it doesn't load the ~/.profile unless it exists
+```
+
 TO-DO
 =====
 
-* Add an uninstall script or guide
+* Add an uninstall script or option
 * Add support for java 8 (see [issue](https://github.com/BlackCorsair/install-jdk-on-steam-deck/issues/3))
 * If you want anything added, just let me know by opening an [issue][3]
 

@@ -38,7 +38,7 @@ cleanup() {
 # if java can't be found (! type java), it won't print anything
 # if java can be found (type java), then will print the message and exit
 exit_if_jdk_is_installed() {
-    ! type java || { log_warning "JDK is already installed, the installed will skip the installation"; exit 0; }
+    ! type java || { log_warning "JDK is already installed, the installer will skip the installation"; exit 0; }
 }
 
 # download the jdk tar release from oracle and it's checksum
@@ -101,7 +101,12 @@ source ~/.bashrc
 if "${INSTALLATION_DIR}/${JDK_17_EXTRACTED_DIR}/bin/java" -version
 then
     log_info "Java is succesfully installed!"
-    log_warning "To activate your java installation execute the following:\n\n\tsource ~/.bashrc\n\n"
+
+    how_to_use="
+    \tTo start using this java installation, open a new terminal or start a new shell by running 'bash'
+    \n\tOriginally you could run 'source ~/.bashrc', but since some time there's an issue with it
+    \tor more info check the issue: https://github.com/BlackCorsair/install-jdk-on-steam-deck/issues/5"
+    log_warning "${how_to_use}"
 else
     log_error "Java wasn't installed properly, please check the script :("
 fi
