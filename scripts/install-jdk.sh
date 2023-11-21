@@ -73,9 +73,9 @@ install_jdk() {
 
 # This will set JAVA_HOME and will also append the java/bin folder to PATH
 set_variables_for_the_installation() {
+    touch ~/.profile
     if ! grep "JAVA_HOME" ~/.bashrc ~/.profile
     then
-        touch ~/.profile
         echo "export JAVA_HOME=${INSTALLATION_DIR}" >> ~/.profile
         echo "export PATH=\$PATH:${INSTALLATION_DIR}/${JDK_17_EXTRACTED_DIR}/bin" >>  ~/.profile
         echo "[[ -f ~/.profile ]] && source ~/.profile" >> ~/.bashrc
