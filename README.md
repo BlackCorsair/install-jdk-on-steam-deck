@@ -42,9 +42,20 @@ This script only works (currently) for the jdk-17, since in order to download jd
 
 Usage
 =====
+
+You can choose which version to install by setting the variable `JDK_VERSION` before executing the script, you can
+even do it on the same command! If you don't select any version, `jdk-17` will be installed by default.
+
+To install **jdk-17**:
 ```bash
-git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git
-./install-jdk-on-steam-deck/scripts/install-jdk.sh
+git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git && \
+JDK_VERSION=17 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
+```
+
+To install **jdk-21**:
+```bash
+git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git && \
+JDK_VERSION=21 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
 ```
 
 How to uninstall it
