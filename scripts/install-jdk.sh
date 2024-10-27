@@ -5,8 +5,8 @@ then
     JDK_VERSION=17
 fi
 
-JDK_17_URL=https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-JDK_17_CHECKSUM_URL=https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz.sha256
+JDK_17_URL=https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz
+JDK_17_CHECKSUM_URL=https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz.sha256
 JDK_17_EXTRACTED_DIR=to-be-known-later
 JDK_17_FILE_NAME=jdk-17_linux-x64_bin.tar.gz
 JDK_17_CHECKSUM_FILE_NAME=jdk-17_linux-x64_bin.tar.gz.sha256

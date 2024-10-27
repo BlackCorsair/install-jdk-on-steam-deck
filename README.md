@@ -44,9 +44,9 @@ Usage
 =====
 
 You can choose which version to install by setting the variable `JDK_VERSION` before executing the script, you can
-even do it on the same command! If you don't select any version, `jdk-17` will be installed by default.
+even do it on the same command! If you don't select any version, `jdk-21` will be installed by default.
 
-To install **jdk-17**:
+To install **jdk-17** (openjdk):
 ```bash
 git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git && \
 JDK_VERSION=17 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
@@ -57,6 +57,9 @@ To install **jdk-21**:
 git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git && \
 JDK_VERSION=21 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
 ```
+
+NOTE: jdk-17 is no longer obtainable from oracle, so the openjdk version from (https://jdk.java.net/archive/) will
+be used instead. This will also happen in the future to jdk-21, probably once jdk-23 is fully embraced.
 
 How to uninstall it
 ===================
