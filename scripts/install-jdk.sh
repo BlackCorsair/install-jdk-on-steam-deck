@@ -5,6 +5,12 @@ then
     JDK_VERSION=23
 fi
 
+JDK_8_URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u482-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u482b08.tar.gz
+JDK_8_CHECKSUM_URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u482-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u482b08.tar.gz.sha256.txt
+JDK_8_EXTRACTED_DIR=to-be-known-later
+JDK_8_FILE_NAME=OpenJDK8U-jdk_x64_linux_hotspot_8u482b08.tar.gz
+JDK_8_CHECKSUM_FILE_NAME=OpenJDK8U-jdk_x64_linux_hotspot_8u482b08.tar.gz.sha256.txt
+
 JDK_17_URL=https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz
 JDK_17_CHECKSUM_URL=https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_linux-x64_bin.tar.gz.sha256
 JDK_17_EXTRACTED_DIR=to-be-known-later
@@ -61,6 +67,14 @@ cleanup() {
 # Allows the user to select which version of the jdk to install
 select_jdk_version() {
     case $JDK_VERSION in
+        8)
+            log_info "You've selected version jdk-8"
+            JDK_URL="${JDK_8_URL}"
+            JDK_CHECKSUM_URL="${JDK_8_CHECKSUM_URL}"
+            JDK_EXTRACTED_DIR="${JDK_8_EXTRACTED_DIR}"
+            JDK_FILE_NAME="${JDK_8_FILE_NAME}"
+            JDK_CHECKSUM_FILE_NAME="${JDK_8_CHECKSUM_FILE_NAME}"
+            ;;
         17)
             log_info "You've selected version jdk-17"
             JDK_URL="${JDK_17_URL}"
@@ -86,7 +100,7 @@ select_jdk_version() {
             JDK_CHECKSUM_FILE_NAME="${JDK_23_CHECKSUM_FILE_NAME}"
             ;;
         *)
-            log_error "The version you've selected isn't supported, either set JDK_VERSION=17 or JDK_VERSION=21"
+            log_error "The version you've selected isn't supported, either set JDK_VERSION=8, JDK_VERSION=17, JDK_VERSION=21 or JDK_VERSION=23"
             cleanup
             exit 1
             ;;
