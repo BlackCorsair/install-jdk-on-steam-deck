@@ -109,8 +109,11 @@ select_jdk_version() {
 
 # if java can't be found (! type java), it won't print anything
 # if java can be found (type java), then will print the message and exit
+# set FORCE=true to bypass this check and reinstall
 exit_if_jdk_is_installed() {
-    ! type java || { log_warning "JDK is already installed, the installer will skip the installation"; exit 0; }
+    if [[ "$FORCE" != "true" ]]; then
+        ! type java || { log_warning "JDK is already installed, the installer will skip the installation\nOverride with: FORCE=true"; exit 0; }
+    fi
 }
 
 # download the jdk tar release from oracle and it's checksum
@@ -144,12 +147,18 @@ install_jdk() {
 }
 
 # This will set JAVA_HOME and will also append the java/bin folder to PATH
+# Keeps previous versions commented out so you can easily switch by uncommenting
 set_variables_for_the_installation() {
     touch ~/.profile
-    if ! grep "JAVA_HOME" ~/.bashrc ~/.profile
-    then
-        echo "export JAVA_HOME=${INSTALLATION_DIR}" >> ~/.profile
-        echo "export PATH=\$PATH:${INSTALLATION_DIR}/${JDK_EXTRACTED_DIR}/bin" >>  ~/.profile
+
+    # Comment out old JAVA_HOME and JDK PATH entries, preserving them for easy switching
+    sed -i 's|^export JAVA_HOME=|#export JAVA_HOME=|' ~/.profile
+    sed -i "s|^export PATH=.*${INSTALLATION_DIR}/.*/bin$|#&|" ~/.profile
+
+    echo "export JAVA_HOME=${INSTALLATION_DIR}" >> ~/.profile
+    echo "export PATH=\$PATH:${INSTALLATION_DIR}/${JDK_EXTRACTED_DIR}/bin" >> ~/.profile
+
+    if ! grep -q "source ~/.profile" ~/.bashrc; then
         echo "[[ -f ~/.profile ]] && source ~/.profile" >> ~/.bashrc
     fi
 }

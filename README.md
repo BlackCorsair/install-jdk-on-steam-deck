@@ -70,6 +70,12 @@ git clone https://github.com/BlackCorsair/install-jdk-on-steam-deck.git && \
 JDK_VERSION=23 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
 ```
 
+If you already have a JDK installed and want to reinstall or switch versions, set `FORCE=true`:
+
+```bash
+FORCE=true JDK_VERSION=17 ./install-jdk-on-steam-deck/scripts/install-jdk.sh
+```
+
 NOTE: jdk-17 is no longer obtainable from oracle, so the openjdk version from (https://jdk.java.net/archive/) will
 be used instead. This will also happen in the future to jdk-21, probably once jdk-23 is fully embraced.
 
